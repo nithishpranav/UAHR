@@ -6,9 +6,9 @@ import { Container } from "reactstrap";
 // core components
 import UserNavbar from "components/Navbars/UserNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import routes from "routes.js";
+import routes from "routes/patientRoutes.js";
 
-const Admin = (props) => {
+const Patient = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 
@@ -20,7 +20,7 @@ const Admin = (props) => {
 
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/patient") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -64,14 +64,13 @@ const Admin = (props) => {
         />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/admin/user-profile" />
+          <Redirect from="*" to="/patient/user-profile" />
         </Switch>
         <Container fluid>
-         {/* <AdminFooter /> */}
         </Container>
       </div>
     </>
   );
 };
 
-export default Admin;
+export default Patient;

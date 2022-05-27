@@ -12,7 +12,6 @@ import {
   Col,
 } from "reactstrap";
 
-
 const Login = () => {
   return (
     <>
@@ -65,7 +64,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" href="/admin">
+                <Button className="my-4" color="primary" type="button" href="/patient">
                   Sign in
                 </Button>
               </div>

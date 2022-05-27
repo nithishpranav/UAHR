@@ -7,7 +7,7 @@ import { Container, Row, Col } from "reactstrap";
 // core components
 
 
-import routes from "routes.js";
+import routes from "routes/routes.js";
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);
