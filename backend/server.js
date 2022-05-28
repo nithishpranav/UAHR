@@ -10,8 +10,8 @@ database()
 app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 
-app.use('/api/patients',require('./routers/patientrouters/patientrouteraccess'))
-
+app.use('/api/patient',require('./routers/patientrouteraccess'))
+app.use('/api/doctor',require('./routers/doctorrouteraccess'))
 app.listen(port,(req,res)=>{
     console.log(`The server is running in ${port}`)
 })
