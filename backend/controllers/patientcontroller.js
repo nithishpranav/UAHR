@@ -1,9 +1,7 @@
 const asynchandler=require('express-async-handler')
-const patientregistrationmodel=require('../models/patientmodel')
+const patientregistrationmodel=require('../models/patientregmodel')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
-const { Error } = require('mongoose')
-const { updateShorthandPropertyAssignment } = require('typescript')
 
 //create patients
 //route post:patients/register
