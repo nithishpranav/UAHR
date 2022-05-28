@@ -1,4 +1,4 @@
 patient.
 
-regieter : http://localhost:5000/api/patients/register
-get : http://localhost:5000/api/patients//get/:id
+regieter : http://localhost:3000/api/patients/register
+get : http://localhost:3000/api/patients//get/:id
