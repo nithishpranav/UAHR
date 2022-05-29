@@ -24,7 +24,7 @@ const doctorregistration=asynchandler(async(req,res)=>{
     doctorlicense,firstname,lastname,gender,email,password:hashedpassword
    })
 
-   res.json({createnewdoctor})
+   res.json({doctorlicense,firstname,lastname,gender,email})
 })
 
 const doctorget=asynchandler(async(req,res)=>{

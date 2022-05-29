@@ -7,3 +7,7 @@ get : http://localhost:3000/api/patient/get/:id
 doctor.
 
 register : http://localhost:3000/api/doctor/register
+
+pharmacy.
+
+register : http://localhost:3000/api/pharmacy/register

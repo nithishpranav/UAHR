@@ -1,5 +1,5 @@
 const asynchandler=require('express-async-handler')
-const patientregistrationmodel=require('../models/patientregmodel')
+const patientregistration=require('../models/patientregmodel')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
 
@@ -9,12 +9,14 @@ const bcrypt=require('bcryptjs')
 const createpatient=asynchandler(async(req,res)=>{
 var{patientid,firstname,lastname,gender,dob,email,password}=req.body
 //check for duplicate emails
-const patient_exists= await patientregistrationmodel.findOne({email})
+const patient_exists= await patientregistration.findOne({email})
 
 if(patient_exists)
 {
 throw new Error('patient already exists')
 }
+
+//hashing password
 
 const salt= await bcrypt.genSalt(10)
 const hashedpassword=await bcrypt.hash(password,salt)
@@ -22,13 +24,13 @@ const hashedpassword=await bcrypt.hash(password,salt)
 //random id generation
 
 var patientid=Math.floor(Math.random() * 1000000000)
-var patientidexists=await patientregistrationmodel.findOne({patientid})
+var patientidexists=await patientregistration.findOne({patientid})
 while(patientidexists){
     var patientid=Math.floor(Math.random() * 1000000000)
-    var patientidexists=await patientregistrationmodel.findOne({patientid})
+    var patientidexists=await patientregistration.findOne({patientid})
 }
 //creation
-const create_new_patient=await patientregistrationmodel.create({
+const create_new_patient=await patientregistration.create({
 patientid,firstname,lastname,gender,dob,email,password:hashedpassword
 })
 //display of created patients

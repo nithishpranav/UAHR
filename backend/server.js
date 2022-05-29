@@ -12,6 +12,8 @@ app.use(express.urlencoded({extended:false}))
 
 app.use('/api/patient',require('./routers/patientrouteraccess'))
 app.use('/api/doctor',require('./routers/doctorrouteraccess'))
+app.use('/api/pharmacy',require('./routers/pharmacyrouteraccess'))
+
 app.listen(port,(req,res)=>{
     console.log(`The server is running in ${port}`)
 })

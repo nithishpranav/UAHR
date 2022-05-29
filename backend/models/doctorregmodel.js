@@ -9,4 +9,4 @@ const doctorregistrationschema=mongoose.Schema({
     password:String,
 })
 
-module.exports=mongoose.model('doctorregmodel',doctorregistrationschema)
+module.exports=mongoose.model('doctorregistration',doctorregistrationschema)

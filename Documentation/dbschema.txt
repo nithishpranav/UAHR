@@ -30,3 +30,8 @@ Doctor
 
 
 
+Licensenum
+pharm Name
+pharm email
+pharm phone
+pharm address

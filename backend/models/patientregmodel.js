@@ -17,4 +17,4 @@ const patientregistrationschema=mongoose.Schema({
   max: '1994-05-23'
 }*/
 
-module.exports=mongoose.model('patientregistrationmodule',patientregistrationschema)
+module.exports=mongoose.model('patientregistration',patientregistrationschema)
