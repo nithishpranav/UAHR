@@ -75,9 +75,7 @@ const loginpatient=asynchandler(async(req,res)=>{
 //route get:patients/get/:id
 
 const getpatient=asynchandler(async(req,res)=>{
-    res.json({
-        message:'get is working'
-    })
+    res.json(req.patient)
     })
 
 //update patients with id
