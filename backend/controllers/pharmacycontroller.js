@@ -27,16 +27,16 @@ const newpharmacy=await pharmacyregistration.create({
     pharmacylicense,pharmacyname,pharmacyphone,
     pharmacyemail,pharmacypassword:hashedpassword
 })
-
+//display created daya
 res.json({
     pharmacylicense,pharmacyname,pharmacyphone,pharmacyemail
 })
 
 })
-
-const pharmacyget=(req,res)=>{
+//
+const loginpharmacy=(req,res)=>{
 res.json({
-    message:'pharmist get'
+    message:'pharmist login working'
 })
 }
 const pharmacyupdate=()=>{
@@ -50,4 +50,4 @@ const pharmacydelete=()=>{
     })
 }
 
-module.exports={createpharmacy,pharmacyget,pharmacyupdate,pharmacydelete}
+module.exports={createpharmacy,loginpharmacy,pharmacyupdate,pharmacydelete}

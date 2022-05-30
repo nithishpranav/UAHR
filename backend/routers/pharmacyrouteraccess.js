@@ -1,9 +1,9 @@
 const express=require('express')
 const router=express.Router()
-const {createpharmacy,pharmacyget,pharmacyupdate,pharmacydelete}=require('../controllers/pharmacycontroller')
+const {createpharmacy,loginpharmacy,pharmacyupdate,pharmacydelete}=require('../controllers/pharmacycontroller')
 
 router.post('/register',createpharmacy)
-router.get('/get/:id',pharmacyget)
+router.post('/login',loginpharmacy)
 router.put('/update/:id',pharmacyupdate)
 router.delete('/delete/:id',pharmacydelete)
 

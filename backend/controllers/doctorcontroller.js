@@ -24,14 +24,33 @@ const doctorregistration=asynchandler(async(req,res)=>{
     doctorlicense,firstname,lastname,gender,email,password:hashedpassword
    })
 
-   res.json({doctorlicense,firstname,lastname,gender,email})
+   res.json({doctorlicense,firstname,lastname,gender,email,Token:generatetoken(createnewdoctor._id)})
 })
 
-const doctorget=asynchandler(async(req,res)=>{
+//doctor login
+
+const doctorlogin=asynchandler(async(req,res)=>{
+    const{email,password}=req.body
+    const doctor=await doctorregistration.findOne({email})
+    if(!doctor)
+    {
+        throw new Error('doctor not exists')
+    }
+    const doctorcheck=await bcrypt.compare(password,doctor.password)
+    if(! doctorcheck)
+    {
+        throw new Error('invalid password')
+    }
     res.json({
-        message:'doctor login is working'
+        firstname:doctor.firstname,
+        lastname:doctor.lastname,
+        gender:doctor.gender,
+        email:doctor.email,
+        token:generatetoken(doctor._id)
     })
 })
+
+//update doctor
 
 const doctorupdate=asynchandler(async(req,res)=>{
     res.json({
@@ -45,5 +64,10 @@ const doctordelete=asynchandler(async(req,res)=>{
     })
 })
 
+//
 
-module.exports={doctorregistration,doctorget,doctorupdate,doctordelete}
+const generatetoken=(id)=>{
+    return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
+}
+
+module.exports={doctorregistration,doctorlogin,doctorupdate,doctordelete}
