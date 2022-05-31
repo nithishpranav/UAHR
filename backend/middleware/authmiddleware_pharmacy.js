@@ -1,8 +1,8 @@
 const jwt=require('jsonwebtoken')
-const patientregistration=require('../models/patientregmodel')
+const pharmacyregistration=require('../models/pharmacyregmodel')
 const asynchandler=require('express-async-handler')
 
-const protectpatient=asynchandler(async(req,res,next)=>{
+const protectpharmacy=asynchandler(async(req,res,next)=>{
     let token
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer') )
     {
@@ -16,7 +16,7 @@ const protectpatient=asynchandler(async(req,res,next)=>{
 
         //get user from token
 
-        req.patient= await patientregistration.findById(decode.id).select('-password')
+        req.pharmacy= await pharmacyregistration.findById(decode.id).select('-password')
         next()
         } catch (error)
         {
@@ -30,4 +30,4 @@ const protectpatient=asynchandler(async(req,res,next)=>{
     }
 })
 
-module.exports={protectpatient,}
+module.exports={protectpharmacy}
