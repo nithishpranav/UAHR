@@ -1,7 +1,7 @@
 const express=require('express')
 const dotenv=require('dotenv').config()
 const database=require('./db/database')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3003
 
 const app=express()
 

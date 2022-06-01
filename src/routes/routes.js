@@ -1,6 +1,6 @@
 import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
-
+import PatientRegister from "views/patient/Register.js";
 var routes = [
   {
     path: "/login",
@@ -14,6 +14,13 @@ var routes = [
     name: "Register",
     icon: "ni ni-circle-08 text-pink",
     component: Register,
+    layout: "/auth",
+  },
+  {
+    path: "/patientRegister",
+    name: "PatientRegister",
+    icon: "ni ni-circle-08 text-pink",
+    component: PatientRegister,
     layout: "/auth",
   },
 ];

@@ -1,5 +1,6 @@
 
 import React from "react";
+import { useState } from "react";
 import classnames from "classnames";
 
 import {
@@ -23,9 +24,40 @@ import {
   Col,
   
 } from "reactstrap";
+//import { patientData } from "data/patient_data";
 
+const patientData = {
+  firstname: '',
+  lastname: '',
+  gender: '',
+  dob: '',
+  email:'',
+  password: '',
+  }
 
 class Register extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = { description: '' };
+  }
+
+  onChange(e) {
+      this.setState({
+          [e.target.name]: e.target.value
+      });
+  }
+
+  onSubmit(e) {
+      e.preventDefault();
+
+      fetch(this.props.formAction, {
+          body: JSON.stringify({description: this.state.description})
+      });
+
+      this.setState({description: ''});
+  }
   componentDidMount() {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -108,7 +140,9 @@ class Register extends React.Component {
                   <CardBody>
                         <TabContent activeTab={"iconTabs" + this.state.iconTabs}>
                           <TabPane tabId="iconTabs1">
-                            <Form role="form">
+                            <Form action={this.props.action}
+                                  method={this.props.method}
+                                  onSubmit={this.onSubmit}>
                               <FormGroup>
                                 <InputGroup className="input-group-alternative mb-3">
                                   <InputGroupAddon addonType="prepend">
@@ -137,6 +171,16 @@ class Register extends React.Component {
                                     </InputGroupText>
                                   </InputGroupAddon>
                                   <Input placeholder="Email" type="email" />
+                                </InputGroup>
+                              </FormGroup>
+                              <FormGroup>
+                                <InputGroup className="input-group-alternative mb-3">
+                                  <InputGroupAddon addonType="prepend">
+                                    <InputGroupText>
+                                      <i className="ni ni-hat-3" />
+                                    </InputGroupText>
+                                  </InputGroupAddon>
+                                  <Input placeholder="Date Of Birth" type="date" />
                                 </InputGroup>
                               </FormGroup>
                               <FormGroup>
@@ -342,5 +386,9 @@ class Register extends React.Component {
     );
   }
 }
+Register.defaultProps = {
+  action: 'http://localhost:3000/api/patient/register',
+  method: 'post'
+};
 
 export default Register;
