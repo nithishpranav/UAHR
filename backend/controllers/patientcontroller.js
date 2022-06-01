@@ -40,17 +40,42 @@ res.json({
     Lastname:create_new_patient.lastname,
     Gender:create_new_patient.gender,
     Date_of_birth:create_new_patient.dob,
-    Email:create_new_patient.email
+    Email:create_new_patient.email,
+    Token:generatetoken(create_new_patient._id)
 })
 })
+
+//login patient
+
+const loginpatient=asynchandler(async(req,res)=>{
+    const{email,password}=req.body
+    const patient=await patientregistration.findOne({email})
+    if(!patient)
+    {
+        throw new Error('patient not exists')
+    }
+    const patientcheck=await bcrypt.compare(password,patient.password)
+    if(! patientcheck)
+    {
+        throw new Error('invalid password')
+    }
+    res.json({
+        firstname:patient.firstname,
+        lastname:patient.lastname,
+        gender:patient.gender,
+        email:patient.email,
+        token:generatetoken(patient._id)
+    })
+})
+
+
+
 
 //get patients with id
 //route get:patients/get/:id
 
 const getpatient=asynchandler(async(req,res)=>{
-    res.json({
-        message:'get is working'
-    })
+    res.json(req.patient)
     })
 
 //update patients with id
@@ -62,9 +87,16 @@ const updatepatient=asynchandler(async(req,res)=>{
     })
 })
 
+//generate token
+const generatetoken=(id)=>{
+    return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
+}
+
+
 
 module.exports={
     createpatient,
+    loginpatient,
     getpatient,
     updatepatient,
 }

@@ -4,8 +4,8 @@ const pharmacyregistrationschema=mongoose.Schema({
     pharmacylicense:String,
     pharmacyname:String,
     pharmacyphone:String,
-    pharmacyemail:String,
-    pharmacypassword:String,
+    email:String,
+    password:String,
 })
 
 module.exports=mongoose.model('pharmacyregistration',pharmacyregistrationschema)

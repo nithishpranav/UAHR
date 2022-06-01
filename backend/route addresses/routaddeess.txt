@@ -1,6 +1,7 @@
 patient.
 
 regieter : http://localhost:3000/api/patient/register
+login : http://localhost:3000/api/patient/login
 get : http://localhost:3000/api/patient/get/:id
 
 

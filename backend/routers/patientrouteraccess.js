@@ -1,9 +1,12 @@
 const express = require('express')
 const router= express.Router()
-const {createpatient,getpatient,updatepatient,}=require('../controllers/patientcontroller')
+const {createpatient,loginpatient,getpatient,updatepatient,}=require('../controllers/patientcontroller')
+const {protectpatient}=require('../middleware/authmiddleware_patient')
+
 
 router.post('/register',createpatient)
-router.get('/get/:id',getpatient)
+router.post('/login',loginpatient)
+router.get('/get',protectpatient,getpatient)
 router.put('/update/:id',updatepatient)
 
 module.exports=router
