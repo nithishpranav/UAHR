@@ -11,7 +11,8 @@ import {
   Row,
   Col,
 } from "reactstrap";
-
+import Register from "views/examples/Register.js";
+import { Link } from "react-router-dom"
 const Login = () => {
   return (
     <>
@@ -81,14 +82,16 @@ const Login = () => {
               <small>Forgot password?</small>
             </a>
           </Col>
+          <Link to="/auth/register">
           <Col className="text-right" xs="6">
             <a
               className="text-light"
-              href="/auth/register"
+              // href="/auth/register"
             >
               <small>Create new account</small>
             </a>
           </Col>
+          </Link>
         </Row>
       </Col>
     </>

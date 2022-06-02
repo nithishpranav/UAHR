@@ -21,7 +21,7 @@ var routes = [
     name: "PatientRegister",
     icon: "ni ni-circle-08 text-pink",
     component: PatientRegister,
-    layout: "/auth",
+    layout: "/start",
   },
 ];
 export default routes;
