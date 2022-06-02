@@ -1,6 +1,6 @@
 import React from "react";
 import {patientData} from "data/patient_data.js";
-import { useLocation, Route, Switch, Redirect } from "react-router-dom";
+import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -62,10 +62,11 @@ const Patient = (props) => {
           {...props}
           brandText={patientData.firstName}
         />
-        <Switch>
+        <Routes>
           {getRoutes(routes)}
-          <Redirect from="*" to="/patient/user-profile" />
-        </Switch>
+          
+          <Navigate from="*" to="/patient/user-profile" />
+        </Routes>
         <Container fluid>
         </Container>
       </div>
