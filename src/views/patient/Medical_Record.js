@@ -1,3 +1,8 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation, Route, Routes, Navigate } from "react-router-dom";
+import routes from "routes/patientRoutes.js";
 
 import {
     Badge,
@@ -9,13 +14,37 @@ import {
   } from "reactstrap";
   // core components
   import Header from "components/Headers/Header.js";
+  import Sidebar from "components/Sidebar/Sidebar.js";
+
   import React, {useState} from 'react';
-  const Medical_Record = () => {
-  
+  const Medical_Record = (prop) => {
+    const getRoutes = (routes) => {
+      return routes.map((prop, key) => {
+        if (prop.layout === "/patient") {
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+    };
     return (
       <>
         <Header />
-  
+        <Sidebar
+        {...prop}
+        routes={routes}
+        logo={{
+          innerLink: "user-profile",
+          imgSrc: require("../../assets/img/brand/uahr_logo_blue.png").default,
+          imgAlt: "...",
+        }}
+      />        
         <Container className="mt--7" fluid>
   
           

@@ -1,3 +1,13 @@
+import { useState, useEffect } from 'react'
+
+import { useSelector, useDispatch } from 'react-redux'
+//import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+//import { useSelector, useDispatch } from 'react-redux'
+//import { logout, reset } from '../features/auth/authSlice'
+import { login, reset } from '../../features/auth/authSlice'
+import Sidebar from "components/Sidebar/Sidebar.js";
+
 import {
     Button,
     Card,
@@ -12,66 +22,99 @@ import {
     Col,
   } from "reactstrap";
   import Register from "views/patient/Register.js";
-  import { Link } from "react-router-dom"
-  const Login = () => {
+ // import { Link } from "react-router-dom"
+  const Login = (prop) => {
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+      })
+    
+      const { email, password } = formData
+    
+      const navigate = useNavigate()
+      const dispatch = useDispatch()
+    
+      const { user, isLoading, isError, isSuccess, message } = useSelector(
+        (state) => state.auth
+      )
+    
+      useEffect(() => {
+        if (isError) {
+          //toast.error(message)
+        }
+    
+        if (isSuccess || user) {
+            console.log(user)
+          navigate('/patientprofile')
+        }
+    
+        dispatch(reset())
+      }, [user, isError, isSuccess, message, navigate, dispatch])
+    
+      const onChange = (e) => {
+        setFormData((prevState) => ({
+          ...prevState,
+          [e.target.name]: e.target.value,
+        }))
+      }
+    
+      const onSubmit = (e) => {
+        e.preventDefault()
+    
+        const userData = {
+          email,
+          password,
+        }
+    
+        dispatch(login(userData))
+      }
+    
+      if (isLoading) {
+       //return <Spinner />
+      }
     return (
       <>
         <Col lg="5" md="7">
-          <Card className="bg-secondary shadow border-0">
-            <CardBody className="px-lg-5 py-lg-5">
-              <div className="text-center text-muted mb-4">
-                <large>Patient Sign In</large>
-              </div>
-              <Form role="form">
-                <FormGroup className="mb-3">
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-email-83" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Email"
-                      type="email"
-                      autoComplete="new-email"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <FormGroup>
-                  <InputGroup className="input-group-alternative">
-                    <InputGroupAddon addonType="prepend">
-                      <InputGroupText>
-                        <i className="ni ni-lock-circle-open" />
-                      </InputGroupText>
-                    </InputGroupAddon>
-                    <Input
-                      placeholder="Password"
-                      type="password"
-                      autoComplete="new-password"
-                    />
-                  </InputGroup>
-                </FormGroup>
-                <div className="custom-control custom-control-alternative custom-checkbox">
-                  <input
-                    className="custom-control-input"
-                    id=" customCheckLogin"
-                    type="checkbox"
-                  />
-                  <label
-                    className="custom-control-label"
-                    htmlFor=" customCheckLogin"
-                  >
-                    <span className="text-muted">Remember me</span>
-                  </label>
-                </div>
-                <div className="text-center">
-                  <Button className="my-4" color="primary" type="button" href="/patient">
-                    Sign in
-                  </Button>
-                </div>
-              </Form>
-            </CardBody>
-          </Card>
+        <section className='heading'>
+        <h1>
+          Login
+        </h1>
+        <p>Login and start setting goals</p>
+      </section>
+
+      <section className='form'>
+        <form onSubmit={onSubmit}>
+          <div className='form-group'>
+            <input
+              type='email'
+              className='form-control'
+              id='email'
+              name='email'
+              value={email}
+              placeholder='Enter your email'
+              onChange={onChange}
+            />
+          </div>
+          <div className='form-group'>
+            <input
+              type='password'
+              className='form-control'
+              id='password'
+              name='password'
+              value={password}
+              placeholder='Enter password'
+              onChange={onChange}
+            />
+          </div>
+
+          <div className='form-group'>
+            <button type='submit' className='btn btn-block'>
+              Submit
+            </button>
+          </div>
+        </form>
+      </section>
           <Row className="mt-3">
             <Col xs="6">
               <a
@@ -82,7 +125,7 @@ import {
                 <small>Forgot password?</small>
               </a>
             </Col>
-            <Link to="/patientRegister">
+            <Link to="/patientregister">
             <Col className="text-right" xs="6">
               <a
                 className="text-light"

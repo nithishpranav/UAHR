@@ -1,4 +1,10 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 
+//import { getGoals, reset } from '../../features/goals/goalSlice'
+import routes from "routes/patientRoutes.js";
 import {
     Button,
     Card,
@@ -14,12 +20,66 @@ import {
   // core components
   
   import Header from "components/Headers/Header.js";
+  import Sidebar from "components/Sidebar/Sidebar.js";
   
-  const Profile = () => {
-  
+  const Profile = (prop) => {
+    const getRoutes = (routes) => {
+      return routes.map((prop, key) => {
+        if (prop.layout === "/patient") {
+          return (
+            <Route
+              path={prop.layout + prop.path}
+              component={prop.component}
+              key={key}
+            />
+          );
+        } else {
+          return null;
+        }
+      });
+    };
+    const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const { user } = useSelector((state) => state.auth)
+  // const { isLoading, isError, message } = useSelector(
+  //   //(state) => state.goals
+  // )
+
+  useEffect(() => {
+    // if (isError) {
+    //   console.log(message)
+    // }
+
+    if (!user) {
+      navigate('/patientlogin')
+    }
+
+    //dispatch(getGoals())
+
+    // return () => {
+    //   dispatch(reset())
+    // }
+  }, [user, navigate, dispatch])
+
+  // if (isLoading) {
+  //   //return <Spinner />
+  // }
     return (
       <>
+      <div>
         <Header />
+        </div>
+        <Sidebar
+        {...prop}
+        routes={routes}
+        logo={{
+          innerLink: "user-profile",
+          imgSrc: require("../../assets/img/brand/uahr_logo_blue.png").default,
+          imgAlt: "...",
+        }}
+      />
+      <div>
         {/* Page content */}
         <Container className="mt--7" fluid>
           <Row>
@@ -222,7 +282,9 @@ import {
             </Col>
           </Row>
         </Container>
+        </div>
       </>
+      
     );
   };
   

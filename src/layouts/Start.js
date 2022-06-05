@@ -1,10 +1,14 @@
 import React from "react";
 import Login from "views/patient/Login.js";
-import Register from "views/patient/Register.js";
-import { useLocation, Route, Routes} from "react-router-dom";
+
+import { Link,useLocation, Route, Routes} from "react-router-dom";
+import patient_routes from "routes/patientRoutes.js";
+import {
+    Button,
+} from "reactstrap";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
-import { Link } from "react-router-dom"
+
 // core components
 
 
@@ -64,14 +68,45 @@ const Auth = (props) => {
           </div>
         </div> */}
         {/* Page content */}
+
+        <Button>
+            <Link to="/patientlogin">
+                Patient
+            </Link>
+        </Button>
+        <Button>
+            <Link to="/doctor">
+                Doctor
+            </Link>
+        </Button>
+        <Button>
+            <Link to="/pharmacy">
+                Pharmacy
+            </Link>
+        </Button>
+
         <Container className="mt -8 pb-5">
           <Row className="justify-content-center">
-           
-            <Routes>
+           <li>
+            <Button>
+            <Link to="/patientlogin">Login</Link>
+            </Button>
+           </li>
+           <li>
+           <Button>
+            <Link to="/patientregister">Register</Link>
+            </Button>
+           </li>
+           <li>
+           <Button>
+            <Link to='/patientregister'>Register</Link>
+            </Button>
+           </li>
+            {/* <Routes>
               {getRoutes(routes)}
               <Route path = "*" element ={<Register/>} />
-              {/* <Navigate from="*" to="/auth/login" /> */}
-            </Routes> 
+             
+            </Routes>  */}
           </Row>
         </Container>
       </div>

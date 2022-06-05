@@ -387,7 +387,7 @@ class Register extends React.Component {
   }
 }
 Register.defaultProps = {
-  action: 'http://localhost:3000/api/patient/register',
+  action: 'http://localhost:5000/api/patient/register',
   method: 'post'
 };
 
