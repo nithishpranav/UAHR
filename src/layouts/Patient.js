@@ -7,7 +7,7 @@ import { Container } from "reactstrap";
 import UserNavbar from "components/Navbars/UserNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import routes from "routes/patientRoutes.js";
-
+console.log(patientData);
 const Patient = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();
@@ -64,8 +64,8 @@ const Patient = (props) => {
         />
         <Routes>
           {getRoutes(routes)}
-          
-          <Navigate from="*" to="/patient/user-profile" />
+          <Route path = "*" to="/patientprofile" />
+          <Navigate from="*" to="/patientprofile" />
         </Routes>
         <Container fluid>
         </Container>
