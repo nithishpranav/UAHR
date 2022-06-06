@@ -1,5 +1,7 @@
 const asynchandler=require('express-async-handler')
 const doctorregistration=require('../models/doctorregmodel')
+const patientregistration=require('../models/patientregmodel')
+const vaccines=require('../models/vaccines')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
 
@@ -80,10 +82,28 @@ const doctordelete=asynchandler(async(req,res)=>{
     })
 })
 
+//add vaccines
+const doctorupdatevaccine=asynchandler(async(req,res)=>{
+        const {patientid,name,date}=req.body
+    const patient_exists=await patientregistration.findOne({patientid})
+    if(!patient_exists){
+        throw new Error('patient doesnt exists')
+    }
+    const vaccinetable_existe=await vaccines.findOne({patientid})
+    if(!vaccinetable_existe)
+    {
+        const createvaccinetable=await vaccines.create({patientid:patientid,vaccine:[{name,date}]})
+        res.json(createvaccinetable)
+    }else{
+        const updatevaccine=await vaccines.updateOne({patientid:patientid},{$push:{vaccine:[{name:name,date:date}]}})
+        res.json(updatevaccine)}
+})
+
+
 //generate token
 
 const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
 }
 
-module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete}
+module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine}

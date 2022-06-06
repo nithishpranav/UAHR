@@ -1,9 +1,9 @@
 const mongoose= require('mongoose')
-const vaccineschema=mongoose.schema({
-    patient_id:String,
+const vaccineschema=mongoose.Schema({
+    patientid:String,
     vaccine:[{
-        vaccine_name:String,
-        vaccinated_date:String}]
+        name:String,
+        date:String}]
 
 })
 
