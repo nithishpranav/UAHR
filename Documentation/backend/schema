@@ -1,0 +1,42 @@
+Prescriptions{
+  prescription_id:
+  patient_id:
+  doctor_license:
+  Date:
+  Active: bool
+  Medicines{
+        Med{
+         name: String
+         doseage: String
+         quantity: INT
+         Timings: String
+         From: DATE
+         To: DATE
+        }:
+  }
+}
+
+Queries:
+  For patient_id X show prescriptions by order of date
+  For patient_id X and Active == True show prescriptions by order of date
+  For prescription_id set Active = true/false
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  patientid:String,
+    firstname:String,
+    lastname:String,
+    gender:String,
+    dob:String,
+      email:String,
+      password:String,

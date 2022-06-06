@@ -23,7 +23,7 @@ const Patient = (props) => {
       if (prop.layout === "/patient") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={prop.path}
             component={prop.component}
             key={key}
           />
@@ -65,7 +65,7 @@ const Patient = (props) => {
         <Routes>
           {getRoutes(routes)}
           <Route path = "*" to="/patientprofile" />
-          <Navigate from="*" to="/patientprofile" />
+          {/* <Navigate from="*" to="/patientprofile" /> */}
         </Routes>
         <Container fluid>
         </Container>

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, Route, Routes, Navigate } from "react-router-dom";
@@ -13,11 +14,21 @@ import {
     Container,
   } from "reactstrap";
   // core components
+  import UserNavbar from "components/Navbars/UserNavbar.js";
+
   import Header from "components/Headers/Header.js";
   import Sidebar from "components/Sidebar/Sidebar.js";
 
   import React, {useState} from 'react';
+  
   const Medical_Record = (prop) => {
+    // React.useEffect(() => {
+    //   document.documentElement.scrollTop = 0;
+    //   document.scrollingElement.scrollTop = 0;
+    //   mainContent.current.scrollTop = 0;
+    // }, [location]);
+    const mainContent = React.useRef(null);
+    const location = useLocation();
     const getRoutes = (routes) => {
       return routes.map((prop, key) => {
         if (prop.layout === "/patient") {
@@ -35,7 +46,7 @@ import {
     };
     return (
       <>
-        <Header />
+
         <Sidebar
         {...prop}
         routes={routes}
@@ -44,9 +55,11 @@ import {
           imgSrc: require("../../assets/img/brand/uahr_logo_blue.png").default,
           imgAlt: "...",
         }}
-      />        
-        <Container className="mt--7" fluid>
-  
+      />      
+      <div classname='px-10'>  
+        <Container >
+        <Header />
+        <UserNavbar/>
           
             <div className="col">
               <Card className="shadow">
@@ -146,6 +159,7 @@ import {
             </div>
   
         </Container>
+        </div>
       </>
     );
   };

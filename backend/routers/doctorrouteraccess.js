@@ -9,5 +9,6 @@ router.post('/login',doctorlogin)
 router.get('/get_doctor',protectdoctor,doctorget)
 router.put('/update/:id',doctorupdate)
 router.get('/delete/:id',doctordelete)
+router.put('/update/vaccine/:id',doctorupdatevaccine)
 
 module.exports=router

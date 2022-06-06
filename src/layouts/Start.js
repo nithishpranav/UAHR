@@ -35,7 +35,7 @@ const Auth = (props) => {
       if (prop.layout === "/auth") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={prop.path}
             component={prop.component}
             key={key}
           />
@@ -70,7 +70,7 @@ const Auth = (props) => {
         {/* Page content */}
 
         <Button>
-            <Link to="/patientlogin">
+            <Link to="/patientprofile">
                 Patient
             </Link>
         </Button>

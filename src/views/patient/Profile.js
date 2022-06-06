@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
+import React from "react";
+
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, Route, Routes, Navigate } from "react-router-dom";
-
+import { Container } from "reactstrap";
 //import { getGoals, reset } from '../../features/goals/goalSlice'
 import routes from "routes/patientRoutes.js";
 import {
@@ -13,16 +15,22 @@ import {
     FormGroup,
     Form,
     Input,
-    Container,
     Row,
     Col,
   } from "reactstrap";
   // core components
-  
+  import UserNavbar from "components/Navbars/UserNavbar.js";
   import Header from "components/Headers/Header.js";
   import Sidebar from "components/Sidebar/Sidebar.js";
   
   const Profile = (prop) => {
+    React.useEffect(() => {
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+      mainContent.current.scrollTop = 0;
+    }, [location]);
+    const mainContent = React.useRef(null);
+    const location = useLocation();
     const getRoutes = (routes) => {
       return routes.map((prop, key) => {
         if (prop.layout === "/patient") {
@@ -68,7 +76,7 @@ import {
     return (
       <>
       <div>
-        <Header />
+        
         </div>
         <Sidebar
         {...prop}
@@ -79,11 +87,13 @@ import {
           imgAlt: "...",
         }}
       />
-      <div>
+      <div  className="main-content" ref={mainContent}>
+      <Header />
+        <UserNavbar/>
         {/* Page content */}
-        <Container className="mt--7" fluid>
+        <Container className="mt--1" fluid>
           <Row>
-            <Col className="order-xl-1" xl="12">
+            <Col className="order-xl-3" xl="12">
               <Card className="bg-secondary shadow">
                 <CardHeader className="bg-black border-0">
                   <Row className="align-items-center">
