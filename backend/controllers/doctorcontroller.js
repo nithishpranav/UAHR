@@ -100,10 +100,10 @@ const doctorupdatevaccine=asynchandler(async(req,res)=>{
 //add prescription
 
 const addprescription=asynchandler(async(req,res)=>{
-    var {prescriptionid,patientid,doctorlicence,name,dosage,timing,datefrom,dateto}=req.body
+    var {patientid,doctorlicense,name,dosage,timing,datefrom,dateto}=req.body
+    var findprescriptionid=await prescription.findOne({patientid,doctorlicense})
     //check for prescription exists
-    const prescriptionexists=await prescription.findOne({prescriptionid})
-    if(!prescriptionexists){
+    if(!findprescriptionid){
 
         //random id generation
 
@@ -113,16 +113,29 @@ while(prescriptionidexists){
     var prescriptionid=Math.floor(Math.random() * 1000000000)
     var prescriptionidexists=await prescription.findOne({prescriptionid})}
 
-        const createnewprescription=await prescription.create({prescriptionid,patientid,doctorlicence,prescription:[{name,dosage,timing,datefrom,dateto}]})
+        const createnewprescription=await prescription.create({prescriptionid,patientid,doctorlicense,prescription:[{name,dosage,timing,datefrom,dateto}]})
         res.json(createnewprescription)
     }
     else{
+        var prescriptionid=findprescriptionid.prescriptionid 
         const updateprescription=await prescription.updateOne({prescriptionid},{$push:{prescription:[{name,dosage,timing,datefrom,dateto}]}})
         res.json(updateprescription)
     }
 
 })
 
+//delete prescriptions
+
+const deleteprescription=asynchandler(async(req,res)=>{
+    const {patientid,doctorlicense}=req.body
+    var findprescriptionid=await prescription.findOne({patientid,doctorlicense})
+    if(!findprescriptionid){
+        throw new Error('prescription not exist')
+    }
+    var prescriptionid=findprescriptionid.prescriptionid
+    const deletingprescription=await prescription.deleteOne({prescriptionid})
+    res.json(deletingprescription)
+})
 
 //generate token
 
@@ -130,4 +143,4 @@ const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
 }
 
-module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,addprescription}
+module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,addprescription,deleteprescription}
