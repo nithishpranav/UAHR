@@ -5,6 +5,7 @@ import { Link,useLocation, Route, Routes} from "react-router-dom";
 import patient_routes from "routes/patientRoutes.js";
 import {
     Button,
+    Card,
 } from "reactstrap";
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
@@ -48,6 +49,7 @@ const Auth = (props) => {
 
   return (
     <>
+    <Card className="bg-gradient-info text-center text-muted mx-4">
       <div className="main-content" ref={mainContent}>
         
         {/* <div className="header bg-gradient-info py-7 py-lg-8">
@@ -68,23 +70,34 @@ const Auth = (props) => {
           </div>
         </div> */}
         {/* Page content */}
-
+        <br></br>
+        <br></br>
+        <br></br>
         <Button>
             <Link to="/patientprofile">
                 Patient
             </Link>
         </Button>
+        <br></br>
+        <br></br>
+        <br></br>
         <Button>
             <Link to="/doctor">
                 Doctor
             </Link>
         </Button>
+        <br></br>
+        <br></br>
+        <br></br>
         <Button>
             <Link to="/pharmacy">
                 Pharmacy
             </Link>
         </Button>
-
+        <br></br>
+        <br></br>
+        <br></br>
+{/* 
         <Container className="mt -8 pb-5">
           <Row className="justify-content-center">
            <li>
@@ -102,14 +115,10 @@ const Auth = (props) => {
             <Link to='/patientregister'>Register</Link>
             </Button>
            </li>
-            {/* <Routes>
-              {getRoutes(routes)}
-              <Route path = "*" element ={<Register/>} />
-             
-            </Routes>  */}
           </Row>
-        </Container>
+        </Container> */}
       </div>
+      </Card>
     </>
   );
 };
