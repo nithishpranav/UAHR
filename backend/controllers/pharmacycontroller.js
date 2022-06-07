@@ -62,10 +62,10 @@ const loginpharmacy=asynchandler(async(req,res)=>{
 
 
 const pharmacyget=asynchandler(async(req,res)=>{
-    res.json({
-        message:'pharmist update'
-    })
+    res.json(req.pharmacy)
 })
+
+
 const pharmacydelete=()=>{
     res.json({
         message:'delete working'

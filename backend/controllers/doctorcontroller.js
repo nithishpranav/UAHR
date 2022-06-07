@@ -150,6 +150,20 @@ while(prescriptionidexists){
 
 })
 
+//get prescription
+
+const doctorgetprescription=asynchandler(async(req,res)=>{
+    const {patientid,doctorlicense}=req.body
+    const prescriptiondata=await prescription.findOne({patientid,doctorlicense})
+    if(!prescriptiondata){
+        throw new Error('prescription data unavailable')
+    }
+   res.json(prescriptiondata)
+
+})
+
+
+
 //delete prescriptions
 
 const deleteprescription=asynchandler(async(req,res)=>{
@@ -169,4 +183,4 @@ const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
 }
 
-module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,doctorgetvaccine,addprescription,deleteprescription}
+module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,doctorgetvaccine,addprescription,doctorgetprescription,deleteprescription}
