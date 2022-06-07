@@ -1,6 +1,7 @@
 const asynchandler=require('express-async-handler')
 const doctorregistration=require('../models/doctorregmodel')
 const patientregistration=require('../models/patientregmodel')
+const prescription=require('../models/prescriptions')
 const vaccines=require('../models/vaccines')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
@@ -65,9 +66,6 @@ const doctorget=asynchandler(async(req,res)=>{
 
 
 
-
-
-
 //update doctor
 
 const doctorupdate=asynchandler(async(req,res)=>{
@@ -82,7 +80,7 @@ const doctordelete=asynchandler(async(req,res)=>{
     })
 })
 
-//add vaccines
+//create or add vaccines in vaccine table
 const doctorupdatevaccine=asynchandler(async(req,res)=>{
         const {patientid,name,date}=req.body
     const patient_exists=await patientregistration.findOne({patientid})
@@ -99,6 +97,32 @@ const doctorupdatevaccine=asynchandler(async(req,res)=>{
         res.json(updatevaccine)}
 })
 
+//add prescription
+
+const addprescription=asynchandler(async(req,res)=>{
+    var {prescriptionid,patientid,doctorlicence,name,dosage,timing,datefrom,dateto}=req.body
+    //check for prescription exists
+    const prescriptionexists=await prescription.findOne({prescriptionid})
+    if(!prescriptionexists){
+
+        //random id generation
+
+        prescriptionid=Math.floor(Math.random() * 1000000000)
+var prescriptionidexists=await prescription.findOne({prescriptionid})
+while(prescriptionidexists){
+    var prescriptionid=Math.floor(Math.random() * 1000000000)
+    var prescriptionidexists=await prescription.findOne({prescriptionid})}
+
+        const createnewprescription=await prescription.create({prescriptionid,patientid,doctorlicence,prescription:[{name,dosage,timing,datefrom,dateto}]})
+        res.json(createnewprescription)
+    }
+    else{
+        const updateprescription=await prescription.updateOne({prescriptionid},{$push:{prescription:[{name,dosage,timing,datefrom,dateto}]}})
+        res.json(updateprescription)
+    }
+
+})
+
 
 //generate token
 
@@ -106,4 +130,4 @@ const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
 }
 
-module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine}
+module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,addprescription}
