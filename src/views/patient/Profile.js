@@ -24,6 +24,7 @@ import {
   import Sidebar from "components/Sidebar/Sidebar.js";
   
   const Profile = (prop) => {
+
     React.useEffect(() => {
       document.documentElement.scrollTop = 0;
       document.scrollingElement.scrollTop = 0;

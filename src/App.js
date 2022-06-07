@@ -15,7 +15,7 @@ import PatientRegister from "./views/patient/Register.js";
 import PatientLogin from "./views/patient/Login.js";
 import PatientProfile from "./views/patient/Profile.js";
 import PatientMR from "./views/patient/Medical_Record";
-
+import PatientVR from "./views/patient/Vaccination_Record";
 function App() {
     return (
       <>
@@ -30,6 +30,7 @@ function App() {
       <Route path="/patientlogin" element={<PatientLogin/>} />
       <Route path="/patientprofile" element={<PatientProfile/>} />
       <Route path="/patientmr" element={<PatientMR/>} />
+      <Route path="/patientvr" element={<PatientVR/>} />
       <Route path="*" element={ <Start /> } />
     </Routes>
     </div>
