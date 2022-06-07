@@ -1,5 +1,6 @@
 const asynchandler=require('express-async-handler')
 const pharmacyregistration=require('../models/pharmacyregmodel')
+const prescriptions=require('../models/prescriptions')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
 
@@ -71,6 +72,19 @@ const pharmacydelete=()=>{
     })
 }
 
+
+//get patient prescriptions
+
+const pharmacygetprescriptions=asynchandler(async(req,res)=>{
+    const {patientid,doctorlicense}=req.body
+    const prescriptiondata=await prescriptions.findOne({patientid,doctorlicense})
+    if(!prescriptiondata){
+        throw new Error('prescription not existe')
+    }
+    res.json(prescriptiondata)
+})
+
+
 //generate token
 
 const generatetoken=(id)=>{
@@ -78,4 +92,4 @@ const generatetoken=(id)=>{
 }
 
 
-module.exports={createpharmacy,loginpharmacy,pharmacyget,pharmacydelete}
+module.exports={createpharmacy,loginpharmacy,pharmacyget,pharmacygetprescriptions,pharmacydelete}
