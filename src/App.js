@@ -7,6 +7,9 @@ import "assets/plugins/nucleo/css/nucleo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "assets/scss/argon-dashboard-react.scss";
 
+import DProfile from "./views/doctor/Profile";
+import DHome from "./views/doctor/Home";
+
 import PatientLayout from "./views/patient/layout.js";
 import AuthLayout from "./layouts/Auth.js";
 import Register from "./views/examples/Register.js";
