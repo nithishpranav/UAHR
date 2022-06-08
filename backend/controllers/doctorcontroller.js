@@ -97,10 +97,36 @@ const doctorupdatevaccine=asynchandler(async(req,res)=>{
         res.json(updatevaccine)}
 })
 
+//get vaccine details
+
+const doctorgetvaccine=asynchandler(async(req,res)=>{
+    const {patientid}=req.body
+    const patient_exists=await patientregistration.findOne({patientid})
+    if(!patient_exists){
+        throw new Error('patient id doesnt exists');
+    }
+    const getvaccinedata= await vaccines.findOne({patientid})
+    if(!getvaccinedata){
+        throw new Error('Vaccine data not available')
+    }
+    res.json(getvaccinedata)
+
+
+})
+
+
+
+
+
 //add prescription
 
 const addprescription=asynchandler(async(req,res)=>{
     var {patientid,doctorlicense,name,dosage,timing,datefrom,dateto}=req.body
+const patient_exists=await patientregistration.findOne({patientid})
+if(!patient_exists){
+    throw new Error('patient not exists')
+}
+
     var findprescriptionid=await prescription.findOne({patientid,doctorlicense})
     //check for prescription exists
     if(!findprescriptionid){
@@ -124,6 +150,20 @@ while(prescriptionidexists){
 
 })
 
+//get prescription
+
+const doctorgetprescription=asynchandler(async(req,res)=>{
+    const {patientid,doctorlicense}=req.body
+    const prescriptiondata=await prescription.findOne({patientid,doctorlicense})
+    if(!prescriptiondata){
+        throw new Error('prescription data unavailable')
+    }
+   res.json(prescriptiondata)
+
+})
+
+
+
 //delete prescriptions
 
 const deleteprescription=asynchandler(async(req,res)=>{
@@ -143,4 +183,4 @@ const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
 }
 
-module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,addprescription,deleteprescription}
+module.exports={createdoctor,doctorlogin,doctorget,doctorupdate,doctordelete,doctorupdatevaccine,doctorgetvaccine,addprescription,doctorgetprescription,deleteprescription}

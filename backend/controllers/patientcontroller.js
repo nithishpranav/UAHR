@@ -2,6 +2,8 @@ const asynchandler=require('express-async-handler')
 const patientregistration=require('../models/patientregmodel')
 const jwt=require('jsonwebtoken')
 const bcrypt=require('bcryptjs')
+const vaccines = require('../models/vaccines')
+const prescriptions = require('../models/prescriptions')
 
 //create patients
 //route post:patients/register
@@ -87,6 +89,29 @@ const updatepatient=asynchandler(async(req,res)=>{
     })
 })
 
+//get patient vaccine
+const patientgetvaccine=asynchandler(async(req,res)=>{
+    const {patientid}=req.body
+    const patient_exists=await vaccines.findOne({patientid})
+    if(!patient_exists){
+        throw new Error('vaccine data doesnt exists')
+    }
+    const getvaccinedata=await vaccines.findOne({patientid})
+    res.json(getvaccinedata)
+})
+
+//get prescriptions
+const patientgetprescription=asynchandler(async(req,res)=>{
+    const {patientid,doctorlicense}=req.body
+    const prescriptiondata=await prescriptions.findOne({patientid,doctorlicense})
+    if(!prescriptiondata){
+        throw new Error('prescription not existe')
+    }
+    res.json(prescriptiondata)
+})
+
+
+
 //generate token
 const generatetoken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET,{expiresIn:'10d'},)
@@ -98,5 +123,7 @@ module.exports={
     createpatient,
     loginpatient,
     getpatient,
+    patientgetvaccine,
+    patientgetprescription,
     updatepatient,
 }

@@ -2,7 +2,7 @@ const mongoose= require('mongoose')
 const prescriptionschema=mongoose.Schema({
     prescriptionid:String,
     patientid:String,
-    doctorlicence:String,
+    doctorlicense:String,
     prescription:[
         {
             name:String,

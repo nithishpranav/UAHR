@@ -1,0 +1,30 @@
+registration::
+
+patient registration : http://localhost:3000/api/patient/register
+doctor registration : http://localhost:3000/api/doctor/register
+pharmacy registration : http://localhost:3000/api/pharmacy/register
+
+
+login::
+
+patient login : http://localhost:3000/api/patient/login
+doctor login : http://localhost:3000/api/doctor/login
+pharmacy login : http://localhost:3000/api/pharmacy/login
+
+get profiledata::
+
+patient get : http://localhost:3000/api/patient/get
+doctor get : http://localhost:3000/api/doctor/get_doctor
+pharmacy get : http://localhost:3000/api/pharmacy/get_pharmacy
+
+get vaccine details::
+
+patient get vaccine : http://localhost:3000/api/patient/get/vaccine
+doctor get vaccine : http://localhost:3000/api/doctor/get/vaccine
+
+get prescriptions::
+
+patient get prescriptions : http://localhost:3000/api/patient/get/prescriptions
+doctor get prescriptions : http://localhost:3000/api/doctor/get/prescription
+doctor get prescriptions : http://localhost:3000/api/doctor/update/prescription
+pharmacy get prescriptions : http://localhost:3000/api/pharmacy/get/prescriptions
