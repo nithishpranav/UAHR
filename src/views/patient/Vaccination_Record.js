@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
-
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 import routes from "routes/patientRoutes.js";
-
+import VForm from 'components/vform.js';
 import {
     Badge,
     Card,
@@ -22,6 +22,60 @@ import {
   import React, {useState} from 'react';
   
   const Vaccination_Record = (prop) => {
+    const [vaccine, getVax] = useState([]);
+    useEffect(() => {
+      //getAllVax();
+    }, []);
+      // const id = localStorage.get();
+      // console.log(id);
+      const id = localStorage.getItem('Patientid');
+      // const config = {headers:{
+      //   Authorization: `Bearer ${user.token}`
+      // }};
+      const auth = {
+        headers: {
+          'patientid': id}
+      };
+      var request = require('request');
+      var options = {
+        'method': 'GET',
+        'url': 'http://localhost:5000/api/patient/get/vaccine',
+        'headers': {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        form: {
+          'patientid': '43874798'
+        }
+      };
+      request(options, function (error, response) {
+        if (error) throw new Error(error);
+        console.log(response.body);
+      });
+      
+
+    // const getAllVax =  () => {
+    //     console.log("VAC")
+    //     console.log(localStorage.getItem('Patientid'));
+    //     axios.get('http://localhost:5000/api/patient/get/vaccine', {
+    //       params: {
+    //         patientid: id
+    //       },
+    //       // headers:{
+    //       //   'Content-Type': 'application/x-www-form-urlencoded'
+    //       // },    
+
+    //     })
+    //     .then(res => {
+    //         // console.log(res.data)
+    //         // const allVax  = res.data.vaccine;
+    //         // getVax(allVax);
+    //     })
+    //     .catch(err => {
+    //         console.log(err)
+    //     })
+    //}
+
+
     // React.useEffect(() => {
     //   document.documentElement.scrollTop = 0;
     //   document.scrollingElement.scrollTop = 0;
@@ -66,9 +120,11 @@ import {
       <div classname='px-10'>  
         <Container >
         <Header />
+       
         <UserNavbar/>
-          
+        <VForm />
             <div className="col">
+            
               <Card className="shadow">
                 <CardHeader className="border-0">
                   <h3 className="mb-0">Medical Record</h3>
@@ -88,12 +144,12 @@ import {
   
                           <Media>
                             <span className="mb-0 text-sm">
-                              Fracture
+                              Small Pox
                             </span>
                           </Media>
                         </Media>
                       </th>
-                      <td>10/08/23</td>
+                      <td>10/08/03</td>
 
                     </tr>
   
@@ -101,60 +157,10 @@ import {
   
                   </tbody>
                 </Table>
-                {/* <CardFooter className="py-4">
-                  <nav aria-label="...">
-                    <Pagination
-                      className="pagination justify-content-end mb-0"
-                      listClassName="justify-content-end mb-0"
-                    >
-                      <PaginationItem className="disabled">
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                          tabIndex="-1"
-                        >
-                          <i className="fas fa-angle-left" />
-                          <span className="sr-only">Previous</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem className="active">
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          1
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          2 <span className="sr-only">(current)</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          3
-                        </PaginationLink>
-                      </PaginationItem>
-                      <PaginationItem>
-                        <PaginationLink
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <i className="fas fa-angle-right" />
-                          <span className="sr-only">Next</span>
-                        </PaginationLink>
-                      </PaginationItem>
-                    </Pagination>
-                  </nav>
-                </CardFooter> */}
               </Card>
+              
             </div>
+            
   
         </Container>
         </div>

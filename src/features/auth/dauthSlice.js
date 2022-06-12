@@ -44,14 +44,13 @@ const initialState = {
   user: user ? user : null,
   isError: false,
   isSuccess: false,
-  currentCustomer : null,
   isLoading: false,
   message: '',
 }
 
 // Register user
 export const register = createAsyncThunk(
-  'patient/register',
+  'doctor/register',
   async (user, thunkAPI) => {
     console.log(user)
     try {

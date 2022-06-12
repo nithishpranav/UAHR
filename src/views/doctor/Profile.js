@@ -34,7 +34,7 @@ import {
     const location = useLocation();
     const getRoutes = (routes) => {
       return routes.map((prop, key) => {
-        if (prop.layout === "/patient") {
+        if (prop.layout === "/doctor") {
           return (
             <Route
               path={prop.layout + prop.path}
@@ -61,7 +61,7 @@ import {
     // }
 
     if (!user) {
-      navigate('/patientlogin')
+      navigate('/doctorlogin')
     }
 
     //dispatch(getGoals())
@@ -102,14 +102,14 @@ import {
                       <h3 className="mb-0">My account</h3>
                     </Col>
                     <Col className="text-right" xs="4">
-                      <Button
+                      {/* <Button
                         color="primary"
                         href="#pablo"
                         // onClick={handleGameClick}
                         size="sm"
                       >
                         Edit Profile
-                      </Button>
+                      </Button> */}
                     </Col>
                   </Row>
                 </CardHeader>
@@ -126,13 +126,13 @@ import {
                               className="form-control-label"
                               htmlFor="input-username"
                             >
-                              Username
+                              Doctor License
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Patient ID"
+                              defaultValue="Doctor License"
                               id="input-username"
-                              placeholder="Paitent ID"
+                              placeholder="Doctor License"
                               type="text"
                             />
                           </FormGroup>
@@ -195,10 +195,10 @@ import {
                     </div>
                     <hr className="my-4" />
                     {/* Address */}
-                    <h6 className="heading-small text-muted mb-4">
+                    {/* <h6 className="heading-small text-muted mb-4">
                       Contact information
-                    </h6>
-                    <div className="pl-lg-4">
+                    </h6> */}
+                    {/* <div className="pl-lg-4">
                       <Row>
                         <Col md="12">
                           <FormGroup>
@@ -270,7 +270,7 @@ import {
                           </FormGroup>
                         </Col>
                       </Row>
-                    </div>
+                    </div> */}
                     <hr className="my-4" />
                     {/* Description */}
                     {/* <h6 className="heading-small text-muted mb-4">About me</h6>

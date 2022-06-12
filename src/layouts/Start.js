@@ -82,7 +82,7 @@ const Auth = (props) => {
         <br></br>
         <br></br>
         <Button>
-            <Link to="/doctor">
+            <Link to="/doctorprofile">
                 Doctor
             </Link>
         </Button>

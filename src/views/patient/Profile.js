@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
-import React from "react";
-
+import React,{ useEffect,useState, Component} from "react";
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { useLocation, Route, Routes, Navigate } from "react-router-dom";
 import { Container } from "reactstrap";
+// import { useState } from "react";
 //import { getGoals, reset } from '../../features/goals/goalSlice'
 import routes from "routes/patientRoutes.js";
 import {
@@ -22,14 +22,65 @@ import {
   import UserNavbar from "components/Navbars/UserNavbar.js";
   import Header from "components/Headers/Header.js";
   import Sidebar from "components/Sidebar/Sidebar.js";
+  // const userToken = useSelector((state) => state.customerReducer.token)
+  const userToken = localStorage.getItem('patient');
+  // console.log("Profile Value"+userToken);
+  const user = JSON.parse(userToken);
+  console.log("Profile Value"+user.token);
+  const config = {headers:{
+    Authorization: `Bearer ${user.token}`
+  }};
+  // const [patient, setPatient] = useState({});
   
   const Profile = (prop) => {
+    const API_URL = 'api/patient/';
+    const [patient, setPatient] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [dob, setDOB] = useState("");
+  const [city , setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [post, setPost] = useState("");
+  const profdata = {};
+  console.log("Email"+email);
+    const register = async (userData) => {
+      const response = axios.get('http://localhost:5000/api/patient/get',config).then(res => {
+        if (response.data) {
+          localStorage.setItem('patuser', JSON.stringify(res.data))
+          userData = res.data
+          profdata = res.data
+          // setPatient(res.data)
+          
+        // setAddress(response.data.address)
+        // setCity(response.data.city)
+        // setCountry(response.data.country)
+        // setPost(response.data.post)
+        }
+        setPatient(res.data.patientid)
+        setEmail(res.data.email)
+        setFirstname(res.data.firstname)
+        setLastname(res.data.lastname)
+        setDOB(res.data.dob)
+         console.log(localStorage.getItem('patuser'))
+        //  console.log(patient)
+      })
+
+    }
+    // const [patient, getPatient] = useState([]);
+
+   
+    // }
+    
+
+    
 
     React.useEffect(() => {
       document.documentElement.scrollTop = 0;
       document.scrollingElement.scrollTop = 0;
       mainContent.current.scrollTop = 0;
     }, [location]);
+    
     const mainContent = React.useRef(null);
     const location = useLocation();
     const getRoutes = (routes) => {
@@ -56,6 +107,7 @@ import {
   // )
 
   useEffect(() => {
+    register();
     // if (isError) {
     //   console.log(message)
     // }
@@ -126,13 +178,14 @@ import {
                               className="form-control-label"
                               htmlFor="input-username"
                             >
-                              Username
+                              Patient ID
                             </label>
                             <Input
                               className="form-control-alternative"
-                              defaultValue="Patient ID"
+                              defaultValue= '123456789'
                               id="input-username"
                               placeholder="Paitent ID"
+                              value={patient}
                               type="text"
                             />
                           </FormGroup>
@@ -148,8 +201,8 @@ import {
                             <Input
                               className="form-control-alternative"
                               id="input-email"
-                              
-                              placeholder="user email"
+                              value={email}
+                              placeholder="npnp@gmail.com"
                               type="email"
                               
                             />
@@ -168,8 +221,8 @@ import {
                             <Input
                               className="form-control-alternative"
                               defaultValue="First name"
-                              id="input-first-name"
                               placeholder="First name"
+                              value={firstname}
                               type="text"
                             />
                           </FormGroup>
@@ -187,6 +240,7 @@ import {
                               defaultValue="Last name"
                               id="input-last-name"
                               placeholder="Last name"
+                              value={lastname}
                               type="text"
                             />
                           </FormGroup>
@@ -206,12 +260,13 @@ import {
                               className="form-control-label"
                               htmlFor="input-address"
                             >
-                              Address
+                              DOB
                             </label>
                             <Input
                               className="form-control-alternative"
                               defaultValue=""
                               id="input-address"
+                              value={dob}
                               placeholder="Home Address"
                               type="text"
                             />

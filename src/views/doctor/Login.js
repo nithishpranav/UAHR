@@ -50,9 +50,8 @@ import {
         }
     
         if (isSuccess || user) {
-          localStorage.setItem("patient", JSON.stringify(user))
             console.log(user)
-          navigate('/patientprofile')
+          navigate('/doctorprofile')
         }
     
         dispatch(reset())
@@ -72,7 +71,7 @@ import {
           email,
           password,
         }
-        
+    
         dispatch(login(userData))
       }
     
@@ -131,7 +130,7 @@ import {
                 <small>Forgot password?</small>
               </a>
             </Col>
-            <Link to="/patientregister">
+            <Link to="/doctorregister">
             <Col className="text-right" xs="6">
               <a
                 className="text-light"

@@ -38,7 +38,7 @@ function Register() {
     password: '',
   })
 
-  const { firstname,lastname,gender,dob, email, password, password2 } = formData
+  const { license,firstname,lastname,gender,dob, email, password, password2 } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -53,7 +53,7 @@ function Register() {
     }
 
     if (isSuccess || user) {
-      navigate('/patientprofile')
+      navigate('/doctorprofile')
     }
 
     // dispatch(reset())
@@ -73,6 +73,7 @@ function Register() {
       //toast.error('Passwords do not match')
     } else {
       const userData = {
+        license,
         firstname,
         lastname,
         email,
@@ -105,6 +106,17 @@ function Register() {
 
       <section className='form'>
         <form onSubmit={onSubmit}>
+        <div className='form-group'>
+            <input
+              type='text'
+              className='form-control'
+              id='license'
+              name='license'
+              value={license}
+              placeholder='Enter Doctor License'
+              onChange={onChange}
+            />
+          </div>
           <div className='form-group'>
             <input
               type='text'

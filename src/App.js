@@ -19,6 +19,13 @@ import PatientLogin from "./views/patient/Login.js";
 import PatientProfile from "./views/patient/Profile.js";
 import PatientMR from "./views/patient/Medical_Record";
 import PatientVR from "./views/patient/Vaccination_Record";
+
+
+import DoctorRegister from "./views/doctor/Register.js";
+import DoctorLogin from "./views/doctor/Login.js";
+import DoctorProfile from "./views/doctor/Profile.js";
+import DoctorHome from "./views/doctor/Home.js";
+import PatientData from "views/doctor/patientdata.js";
 function App() {
     return (
       <>
@@ -34,6 +41,12 @@ function App() {
       <Route path="/patientprofile" element={<PatientProfile/>} />
       <Route path="/patientmr" element={<PatientMR/>} />
       <Route path="/patientvr" element={<PatientVR/>} />
+
+      <Route path="/doctorregister" element={<DoctorRegister/>} />
+      <Route path="/doctorlogin" element={<DoctorLogin/>} />
+      <Route path="/doctorprofile" element={<DoctorProfile/>} />
+      <Route path="/doctorhome" element={<DoctorHome/>} />
+      <Route path="/patientdata" element={<PatientData/>} />
       <Route path="*" element={ <Start /> } />
     </Routes>
     </div>
